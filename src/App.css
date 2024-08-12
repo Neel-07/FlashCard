@@ -1,0 +1,24 @@
+.card{
+  position: relative;
+  transform-style: preserve-3d ;
+  transition:200ms;
+  transform: perspective(1000px) rotateY(var(--rotate-y,0));
+}
+.card.flip{
+  --rotate-y :180deg;
+}
+.card .front,
+.card .back {
+ /* position:absolute; */
+ backface-visibility: hidden;
+}
+
+.card .back{
+  transform:rotateY(180deg);
+}
+
+.front button{
+  display:none;
+  transform-style: preserve-3d ;
+  --rotate-y :180deg;
+}
