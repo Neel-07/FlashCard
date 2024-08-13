@@ -17,8 +17,3 @@
   transform:rotateY(180deg);
 }
 
-.front button{
-  display:none;
-  transform-style: preserve-3d ;
-  --rotate-y :180deg;
-}
