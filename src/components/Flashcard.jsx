@@ -3,6 +3,10 @@ import React, { useState } from "react";
 function Flashcard({ card, handleRemove, id }) {
   const [flip, setFlip] = useState(false);
 
+  if (!card) {
+    return <div>No flashcard available</div>;
+  }
+
   return (
     <div
       onClick={() => setFlip(!flip)}
@@ -11,13 +15,18 @@ function Flashcard({ card, handleRemove, id }) {
       }`}
     >
       <div className="front">
-        <h1 className="h-60 flex items-center justify-center text-xl font-semibold turncate ">{card.Question}</h1>
+        <h1 className="h-60 flex items-center justify-center text-xl font-semibold truncate ">
+          {card.Question}
+        </h1>
         <div className="buttons flex gap-4">
           <button className=" ml-2 px-5 py-1 bg-red-600 text-xs rounded-md font-semibold text-white mt-4">
             Edit
           </button>
           <button
-            onClick={() => handleRemove(id)}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleRemove(id);
+            }}
             className="px-3 py-1 bg-red-600 text-xs rounded-md font-semibold text-white mt-4"
           >
             Remove It
@@ -25,7 +34,9 @@ function Flashcard({ card, handleRemove, id }) {
         </div>
       </div>
 
-      <h1 className=" h-56 back flex items-center justify-center  truncate  text-xl font-semibold">{card.Answer}</h1>
+      <h1 className="h-56 back flex items-center justify-center truncate text-xl font-semibold">
+        {card.Answer}
+      </h1>
     </div>
   );
 }
