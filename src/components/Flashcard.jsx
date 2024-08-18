@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function Flashcard({ card, handleRemove, id }) {
+function Flashcard({ card, handleRemove, handleEdit, id }) {
   const [flip, setFlip] = useState(false);
 
   if (!card) {
@@ -19,7 +19,13 @@ function Flashcard({ card, handleRemove, id }) {
           {card.Question}
         </h1>
         <div className="buttons flex gap-4">
-          <button className=" ml-2 px-5 py-1 bg-red-600 text-xs rounded-md font-semibold text-white mt-4">
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              handleEdit(id);
+            }}
+            className="ml-2 px-5 py-1 bg-blue-600 text-xs rounded-md font-semibold text-white mt-4"
+          >
             Edit
           </button>
           <button
@@ -29,7 +35,7 @@ function Flashcard({ card, handleRemove, id }) {
             }}
             className="px-3 py-1 bg-red-600 text-xs rounded-md font-semibold text-white mt-4"
           >
-            Remove It
+            Remove
           </button>
         </div>
       </div>

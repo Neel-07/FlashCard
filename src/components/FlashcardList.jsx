@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import Flashcard from './Flashcard';
 
-function FlashcardList({ cards, handleRemove }) {
+function FlashcardList({ cards, handleRemove, handleEdit }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const goToPrevious = () => {
@@ -27,7 +27,12 @@ function FlashcardList({ cards, handleRemove }) {
         <FaArrowLeft size={24} />
       </button>
       <div className='w-64'>
-        <Flashcard handleRemove={handleRemove} id={currentIndex} card={cards[currentIndex]} />
+        <Flashcard
+          handleRemove={handleRemove}
+          handleEdit={handleEdit}
+          id={currentIndex}
+          card={cards[currentIndex]}
+        />
       </div>
       <button onClick={goToNext} className='p-2'>
         <FaArrowRight size={24} />
