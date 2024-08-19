@@ -18,12 +18,12 @@ function FlashcardList({ cards, handleRemove, handleEdit }) {
   };
 
   if (!cards || cards.length === 0) {
-    return <div>No flashcards available</div>;
+    return <div className=" text-center text-gray-700">No flashcards available</div>;
   }
 
   return (
-    <div className='w-full h-80 flex justify-center items-center gap-4'>
-      <button onClick={goToPrevious} className='p-2'>
+    <div className='flex justify-center items-center gap-6 mt-8'>
+      <button onClick={goToPrevious} className='p-2 text-gray-600 hover:text-gray-800 transition duration-300'>
         <FaArrowLeft size={24} />
       </button>
       <div className='w-64'>
@@ -34,7 +34,7 @@ function FlashcardList({ cards, handleRemove, handleEdit }) {
           card={cards[currentIndex]}
         />
       </div>
-      <button onClick={goToNext} className='p-2'>
+      <button onClick={goToNext} className='p-2 text-gray-600 hover:text-gray-800 transition duration-300'>
         <FaArrowRight size={24} />
       </button>
     </div>
