@@ -1,9 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import Flashcard from './Flashcard';
 
 function FlashcardList({ cards, handleRemove, handleEdit }) {
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    // Adjust currentIndex if it's out of bounds after cards change (either added or removed)
+    if (currentIndex >= cards.length) {
+      setCurrentIndex(cards.length - 1);
+    } else if (currentIndex < 0) {
+      setCurrentIndex(0);
+    }
+  }, [cards, currentIndex]);
 
   const goToPrevious = () => {
     setCurrentIndex((prevIndex) =>
@@ -17,8 +26,16 @@ function FlashcardList({ cards, handleRemove, handleEdit }) {
     );
   };
 
+  const handleRemoveCard = (id) => {
+    handleRemove(id);
+    // Adjust currentIndex if needed after a card is removed
+    if (currentIndex >= cards.length - 1) {
+      setCurrentIndex(cards.length - 2 >= 0 ? cards.length - 2 : 0);
+    }
+  };
+
   if (!cards || cards.length === 0) {
-    return <div className=" text-center text-gray-700">No flashcards available</div>;
+    return <div className="text-center text-gray-700">No flashcards available</div>;
   }
 
   return (
@@ -28,7 +45,7 @@ function FlashcardList({ cards, handleRemove, handleEdit }) {
       </button>
       <div className='w-64'>
         <Flashcard
-          handleRemove={handleRemove}
+          handleRemove={handleRemoveCard}
           handleEdit={handleEdit}
           id={currentIndex}
           card={cards[currentIndex]}
